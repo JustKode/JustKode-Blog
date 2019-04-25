@@ -19,7 +19,7 @@ const Footer = (): JSX.Element => {
     return (
         <FooterBox>
             <FooterBanner>JUSTKODE</FooterBanner>
-            <FooterContext>Copyright © <strong>D.Com.</strong> All rights reserved.</FooterContext>
+            <FooterContext>Copyright © <strong>JUSTKODE</strong> All rights reserved.</FooterContext>
         </FooterBox>
     )
 }
