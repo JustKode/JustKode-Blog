@@ -33,6 +33,7 @@ export default class MyDocument extends Document {
         <Html>
           <Head>
             <style>{`body {margin: 0; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;}`}</style>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
           </Head>
           <body>
             <Main />
