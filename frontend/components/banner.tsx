@@ -1,14 +1,31 @@
 import {Component} from 'react'
 import styled from 'styled-components'
-import {mainColor} from '../styles/color'
+// @ts-ignore
+import ReactRotatingText from 'react-rotating-text'
 import {phoneMaxRowSize, tabletMaxRowSize, sidePaddingSize} from '../styles/layout'
 
 const MainContainer = styled.div`
+    background-image: url('/static/banner-image.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    @keyframes move {
+        from {background-position: center top;}
+        to {background-position: center;}
+    }
+
+    animation-name: move;
+    animation-duration: 30s;
+    animation-timing-function: ease;
+
     position: relative;
-    background-color: #444444;
+    background-color: black;
+    
     height: 360px;
     text-align: center;
     color: white;
+    z-index: -1;
 `
 
 const SubContainer = styled.div`
@@ -25,7 +42,7 @@ const SubContainer = styled.div`
 `
 
 const TitleContext = styled.div`
-    font-weight: bolder;
+    font-weight: 900;
     font-size: 2rem;
     text-align: left;
     width: ${phoneMaxRowSize};
@@ -37,6 +54,10 @@ const SubContext = styled.div`
     text-align: left;
     width: ${phoneMaxRowSize};
     padding: ${sidePaddingSize};
+
+    @media (max-width: ${phoneMaxRowSize}) {
+        width: 100%;
+    }
 `
 
 class Banner extends Component<any, any> {
@@ -44,8 +65,8 @@ class Banner extends Component<any, any> {
         return (
             <MainContainer>
                 <SubContainer>
-                    <TitleContext>멋이 다 흘러</TitleContext>
-                    <SubContext>흘러서 넘쳐 멀어 버렸어 배로 막 벌어 어머 눈이 와 눈이 와 눈이 와 눈이 와</SubContext>
+                    <TitleContext>JUSTKODE</TitleContext>
+                    <SubContext>Hello! I'm <ReactRotatingText items={['JustKode!', 'Student Programmer!', 'Python Programmer!', 'JavaScript Programmer!', 'Full Stack Programmer!', 'Data Engineer!']} /></SubContext>
                 </SubContainer>
             </MainContainer>
         )

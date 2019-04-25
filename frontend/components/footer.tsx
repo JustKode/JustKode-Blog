@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 const FooterBox = styled.div`
+    padding-top: 20px;
     width: 100%;
     text-align: center;
     border-top: 0.3px solid #eeeeee;
@@ -8,7 +9,7 @@ const FooterBox = styled.div`
 
 const FooterBanner = styled.div`
     font-size: 2rem;
-    font-weight: bold;
+    font-weight: 900;
 `
 const FooterContext = styled.div`
     

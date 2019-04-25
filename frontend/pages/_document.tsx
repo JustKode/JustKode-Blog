@@ -32,8 +32,9 @@ export default class MyDocument extends Document {
     return(
         <Html>
           <Head>
-            <style>{`body {margin: 0; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;}`}</style>
+            <style>{`body {margin: 0; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; font-family: Noto Sans KR,Helvetica,Arial,sans-serif;;}`}</style>
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
+            <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR" rel="stylesheet"></link>
           </Head>
           <body>
             <Main />

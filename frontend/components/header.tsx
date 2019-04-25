@@ -18,6 +18,7 @@ const HeaderBox = styled.div`
       }
 
       ul.checked {
+        z-index: 9999;
         position: fixed;
         top: 80px;
         right: 0;
@@ -31,8 +32,7 @@ const HeaderBox = styled.div`
         background-color: #444444;
       }
       ul.checked li>a{
-        padding: 0;
-        padding-right: 10px;
+        padding: 10px;
       }
       ul.checked li>a:hover{
         color: white;
@@ -50,6 +50,7 @@ const HeaderBox = styled.div`
     }
     
     li {
+      padding: 5px;
       transition: 0.4s;
       text-decoration: none;
       display: inline-block;
@@ -69,7 +70,7 @@ const ListElement = styled.a`
 `
 
 const Banner = styled.a`
-  font-weight: bold;
+  font-weight: 900;
   font-size: 1.3rem;
 `
 
