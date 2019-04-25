@@ -1,5 +1,6 @@
 import * as React from "react";
 import Layout from "../components/layout"
+import Banner from "../components/banner"
 import styled from "styled-components";
 
 const Title = styled.h1`
@@ -10,7 +11,7 @@ const Title = styled.h1`
 export default () => {
   return (
     <Layout>
-        <Title>Hello World!</Title>
+        <Banner></Banner>
     </Layout>
   )
 }
