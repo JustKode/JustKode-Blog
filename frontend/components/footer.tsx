@@ -1,7 +1,8 @@
 import styled from 'styled-components'
+import { mainColor } from '../styles/color';
 
 const FooterBox = styled.div`
-    padding-top: 20px;
+    padding: 25px 0;
     width: 100%;
     text-align: center;
     border-top: 0.3px solid #eeeeee;
@@ -11,8 +12,21 @@ const FooterBanner = styled.div`
     font-size: 2rem;
     font-weight: 900;
 `
+
 const FooterContext = styled.div`
     
+`
+
+const FooterLinkBox = styled.div`
+    padding: 8px;
+`
+
+const FooterLink = styled.a`
+    &:hover {
+        color: ${mainColor}
+    }
+
+    padding: 0 8px;
 `
 
 const Footer = (): JSX.Element => {
@@ -20,6 +34,11 @@ const Footer = (): JSX.Element => {
         <FooterBox>
             <FooterBanner>JUSTKODE</FooterBanner>
             <FooterContext>Copyright © <strong>JUSTKODE</strong> All rights reserved.</FooterContext>
+            <FooterLinkBox>
+                <FooterLink>Github</FooterLink>
+                <FooterLink style={{borderLeft: '0.2px solid #dddddd', borderRight: '0.2px solid #dddddd'}}>Facebook</FooterLink>
+                <FooterLink>Instagram</FooterLink>
+            </FooterLinkBox>
         </FooterBox>
     )
 }

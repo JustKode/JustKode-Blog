@@ -63,9 +63,30 @@ const HeaderBox = styled.div`
 
 const ListElement = styled.a`
   transition: 0.4s;
-  
-  &:hover {
-    color: ${mainColor}
+  position: relative;
+
+  @media (min-width: ${tabletMaxRowSize}) {
+    &:after{
+      content: '';
+      position: absolute;
+      width: 0; height: 0.15rem;
+      display: block;
+      margin-top: 5px;
+      right: 15%;
+      background: #bbbbbb;
+      transition: width .2s ease;
+      -webkit-transition: width .2s ease;
+    }
+    
+    &:hover:after{
+      width: 70%;
+      left: 15%;
+      background: #bbbbbb;
+    }
+
+    &:hover {
+      color: ${mainColor}
+    }
   }
 `
 
