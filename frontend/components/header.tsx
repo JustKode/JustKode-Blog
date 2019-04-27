@@ -69,11 +69,11 @@ const ListElement = styled.a`
     &:after{
       content: '';
       position: absolute;
-      width: 0; height: 0.15rem;
+      width: 0; height: 0.2rem;
       display: block;
       margin-top: 5px;
       right: 15%;
-      background: #bbbbbb;
+      background: #888888;
       transition: width .2s ease;
       -webkit-transition: width .2s ease;
     }
@@ -81,11 +81,7 @@ const ListElement = styled.a`
     &:hover:after{
       width: 70%;
       left: 15%;
-      background: #bbbbbb;
-    }
-
-    &:hover {
-      color: ${mainColor}
+      background: #888888;
     }
   }
 `

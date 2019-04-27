@@ -1,6 +1,7 @@
 import * as React from "react"
 import Layout from "../components/layout"
 import Banner from "../components/banner"
+import Preview from "../components/preview"
 import styled from "styled-components"
 import {phoneMaxRowSize, tabletMaxRowSize, sidePaddingSize} from '../styles/layout'
 
@@ -19,14 +20,18 @@ const HelloSubContainer = styled.div`
 `
 
 const HelloTitle = styled.div`
-  font-size: 2rem;
-  font-weight: bold;
-  padding: ${sidePaddingSize};
+  span {
+    font-size: 2rem;
+    border-bottom: 0.4rem solid black;
+    font-weight: bold;
+  }
+  
+  margin: 1rem;
 `
 
 const HelloContent = styled.div`
   margin: auto;
-  padding: 10px;
+  padding: 0.3rem;
   max-width: 720px;
   width: 100%;
 `
@@ -45,6 +50,18 @@ const StackTitle = styled.div`
   font-weight: bold;
   border-bottom: 0.3px solid #dddddd;
   padding: 8px 0;
+
+  &:after{
+      content: '';
+      position: absolute;
+      width: 0; height: 0.15rem;
+      display: block;
+      margin-top: 5px;
+      right: 15%;
+      background: #bbbbbb;
+      transition: width .2s ease;
+      -webkit-transition: width .2s ease;
+    }
 `
 
 const StackContent = styled.div`
@@ -66,52 +83,17 @@ export default () => {
         <Banner></Banner>
         <HelloContainer>
           <HelloSubContainer>
-            <HelloTitle>Hello! I'm JustKode</HelloTitle>
+            <HelloTitle><span>Hello! I'm JustKode</span></HelloTitle>
             <HelloContent>안녕하세요! 현재 경희대학교 컴퓨터공학부 3학년 휴학 중인 JustKode, 박민재라고 합니다.</HelloContent>
             <HelloContent>2017.03.01~ 경희대학교 컴퓨터공학과 재학</HelloContent>
             <HelloContent>2019.06.02~2020.12.29 육군 복무</HelloContent>
+            <HelloContent style={{fontWeight: 'bold', padding: '1.2rem', fontSize: '1.2rem'}}>Just, Kode it.</HelloContent>
           </HelloSubContainer>
+        </HelloContainer>
+        <HelloContainer style={{backgroundColor: '#eeeeee'}}>
           <HelloSubContainer>
-            <HelloTitle>Stack</HelloTitle>
-            <StackContainer>
-              <StackTitle>Frontend</StackTitle>
-              <StackContent>
-                <img src="/static/react-logo.png" />
-                <div className="name">React</div>
-                <div className="percent">30%</div>
-              </StackContent>
-              <StackContent>
-                <img src="/static/vue-logo.png" />
-                <div className="name">Vue.js</div>
-                <div className="percent">20%</div>
-              </StackContent>
-            </StackContainer>
-            <StackContainer>
-              <StackTitle>Backend</StackTitle>
-              <StackContent>
-                <img src="/static/django-logo.jpg" />
-                <div className="name">Django</div>
-                <div className="percent">50%</div>
-              </StackContent>
-              <StackContent>
-                <img src="/static/nodejs-logo.png" />
-                <div className="name">Node.js</div>
-                <div className="percent">50%</div>
-              </StackContent>
-              <StackContent>
-                <img src="/static/flask-logo.jpg" />
-                <div className="name">Flask</div>
-                <div className="percent">30%</div>
-              </StackContent>
-            </StackContainer>
-            <StackContainer>
-              <StackTitle>Data</StackTitle>
-              <StackContent>
-                <img src="/static/pytorch-logo.png" />
-                <div className="name">PyTorch(DL)</div>
-                <div className="percent">20%</div>
-              </StackContent>
-            </StackContainer>
+            <HelloTitle><span>Recent Posts</span></HelloTitle>
+            <Preview></Preview>
           </HelloSubContainer>
         </HelloContainer>
     </Layout>

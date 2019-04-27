@@ -33,7 +33,7 @@ export default class MyDocument extends Document {
         <Html>
           <Head>
             <style>{`body {margin: 0; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; font-family: Noto Sans KR,Helvetica,Arial,sans-serif;;}`}</style>
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossOrigin="anonymous"></link>
             <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR" rel="stylesheet"></link>
           </Head>
           <body>

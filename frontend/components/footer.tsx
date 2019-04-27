@@ -5,7 +5,7 @@ const FooterBox = styled.div`
     padding: 25px 0;
     width: 100%;
     text-align: center;
-    border-top: 0.3px solid #eeeeee;
+    border-top: 0.3px solid #dddddd;
 `
 
 const FooterBanner = styled.div`
