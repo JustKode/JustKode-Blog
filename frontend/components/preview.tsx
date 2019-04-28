@@ -10,7 +10,6 @@ const PreviewContainer = styled.div`
     border-bottom: 0.3px solid #bbbbbb;
     display: block;
     text-align: left;
-    position: relative;
 
     a {
         text-decoration: none;
@@ -22,6 +21,12 @@ const PreviewTitle = styled.div`
     font-size: 1.5rem;
     font-weight: bold;
     margin: 0.5rem 0;
+
+    span {
+        font-size: 0.9rem;
+        font-weight: 300;
+        color: orange;
+    }
 `
 
 const PreviewContent = styled.div`
@@ -71,11 +76,12 @@ const PreviewSubContainer = styled.div`
 interface PreviewProps {
     img: string,
     title: string,
+    commentCount: number,
     content: string,
     category: string,
     writedAt: string,
     postLink: string,
-    categoryLink: string
+    categoryLink: string,
 }
 
 class Preview extends Component<PreviewProps, any> {
@@ -84,8 +90,8 @@ class Preview extends Component<PreviewProps, any> {
             <PreviewContainer>
                 <PreviewSubContainer>
                     <a href={this.props.postLink}>
-                        <PreviewTitle className="title">{this.props.title}</PreviewTitle>
-                        <PreviewContent className="content">{this.props.content}</PreviewContent>
+                        <PreviewTitle>{this.props.title} <span>[{this.props.commentCount}]</span></PreviewTitle>
+                        <PreviewContent>{this.props.content}</PreviewContent>
                     </a>
                     <PreviewBottom>
                         <span>

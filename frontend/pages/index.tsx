@@ -37,8 +37,13 @@ const HelloContent = styled.div`
 `
 
 const LinkContainer = styled.div`
-  display: inline-block;
-  width: 25%;
+  i {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 3rem;
+    margin: 1rem;
+    color: white;
+  }
 `
 
 
@@ -61,6 +66,7 @@ export default () => {
             <Preview
               img="/static/banner-image.jpg"
               title="string"
+              commentCount={1}
               content="string"
               category="string"
               postLink="naver.com"
@@ -70,6 +76,7 @@ export default () => {
             <Preview
               img="/static/banner-image.jpg"
               title="string"
+              commentCount={3}
               content="나는 빡빡이다 나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다"
               category="string"
               postLink="naver.com"
@@ -81,7 +88,12 @@ export default () => {
         <HelloContainer style={{backgroundColor: '#444444', color: 'white'}}>
           <HelloSubContainer>
             <HelloTitle><span style={{borderBottom: '0.4rem solid white'}}>Link</span></HelloTitle>
-            <LinkContainer></LinkContainer>
+            <LinkContainer>
+              <a href=""><i className="fas fa-user-alt"></i></a>
+              <a href=""><i className="fab fa-github"></i></a>
+              <a href=""><i className="fab fa-instagram"></i></a>
+              <a href=""><i className="fab fa-facebook-square"></i></a>
+            </LinkContainer>
           </HelloSubContainer>
         </HelloContainer>
     </Layout>
