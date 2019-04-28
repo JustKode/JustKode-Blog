@@ -36,46 +36,11 @@ const HelloContent = styled.div`
   width: 100%;
 `
 
-const StackContainer = styled.div`
-  vertical-align: top;
+const LinkContainer = styled.div`
   display: inline-block;
-  max-width: 240px;
-  width: 33%;
-  border: 0.3px solid #dddddd;
+  width: 25%;
 `
 
-const StackTitle = styled.div`
-  width: 100%;
-  font-size: 1.2rem;
-  font-weight: bold;
-  border-bottom: 0.3px solid #dddddd;
-  padding: 8px 0;
-
-  &:after{
-      content: '';
-      position: absolute;
-      width: 0; height: 0.15rem;
-      display: block;
-      margin-top: 5px;
-      right: 15%;
-      background: #bbbbbb;
-      transition: width .2s ease;
-      -webkit-transition: width .2s ease;
-    }
-`
-
-const StackContent = styled.div`
-  border-bottom: 0.3px solid #dddddd;
-  img {
-    width: 80%;
-    padding: 10%;
-    display: inline-block;
-    border-bottom: 0.3px solid #dddddd;
-  }
-  div.name {
-    font-weight: bold;
-  }
-`
 
 export default () => {
   return (
@@ -93,7 +58,28 @@ export default () => {
         <HelloContainer style={{backgroundColor: '#eeeeee'}}>
           <HelloSubContainer>
             <HelloTitle><span>Recent Posts</span></HelloTitle>
-            <Preview></Preview>
+            <Preview
+              img="/static/banner-image.jpg"
+              title="string"
+              content="string"
+              category="string"
+              postLink="naver.com"
+              categoryLink="github.com"
+            ></Preview>
+            <Preview
+              img="/static/banner-image.jpg"
+              title="string"
+              content="나는 빡빡이다 나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다"
+              category="string"
+              postLink="naver.com"
+              categoryLink="github.com"
+            ></Preview>
+          </HelloSubContainer>
+        </HelloContainer>
+        <HelloContainer style={{backgroundColor: '#444444', color: 'white'}}>
+          <HelloSubContainer>
+            <HelloTitle><span style={{borderBottom: '0.4rem solid white'}}>Link</span></HelloTitle>
+            <LinkContainer></LinkContainer>
           </HelloSubContainer>
         </HelloContainer>
     </Layout>
