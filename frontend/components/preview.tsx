@@ -48,7 +48,16 @@ const PreviewImg = styled.img`
 const PreviewBottom = styled.div`
     margin: 0.3rem 0;
     font-size: 0.8rem;
-    color: #444444;
+    color: #888888;
+    a {
+        color: #888888;
+    }
+    &>span {
+        margin-right: 1rem;
+    }
+    i {
+        margin-right: 0.2rem;
+    }
 `
 
 const PreviewSubContainer = styled.div`
@@ -64,6 +73,7 @@ interface PreviewProps {
     title: string,
     content: string,
     category: string,
+    writedAt: string,
     postLink: string,
     categoryLink: string
 }
@@ -78,8 +88,14 @@ class Preview extends Component<PreviewProps, any> {
                         <PreviewContent className="content">{this.props.content}</PreviewContent>
                     </a>
                     <PreviewBottom>
-                        <i className="far fa-folder-open"></i>
-                        <a href={this.props.categoryLink}><span> {this.props.category}</span></a>
+                        <span>
+                            <i className="far fa-folder-open"></i>
+                            <a href={this.props.categoryLink}><span> {this.props.category}</span></a>
+                        </span>
+                        <span>
+                            <i className="far fa-clock"></i>
+                            <span>{this.props.writedAt}</span>
+                        </span>    
                     </PreviewBottom>
                 </PreviewSubContainer>
                 <PreviewImg src={this.props.img}></PreviewImg>

@@ -49,7 +49,7 @@ export default () => {
         <HelloContainer>
           <HelloSubContainer>
             <HelloTitle><span>Hello! I'm JustKode</span></HelloTitle>
-            <HelloContent>안녕하세요! 현재 경희대학교 컴퓨터공학부 3학년 휴학 중인 JustKode, 박민재라고 합니다.</HelloContent>
+            <HelloContent>안녕하세요! 현재 경희대학교 컴퓨터공학과 3학년 휴학 중인 JustKode, 박민재라고 합니다.</HelloContent>
             <HelloContent>2017.03.01~ 경희대학교 컴퓨터공학과 재학</HelloContent>
             <HelloContent>2019.06.02~2020.12.29 육군 복무</HelloContent>
             <HelloContent style={{fontWeight: 'bold', padding: '1.2rem', fontSize: '1.2rem'}}>Just, Kode it.</HelloContent>
@@ -65,6 +65,7 @@ export default () => {
               category="string"
               postLink="naver.com"
               categoryLink="github.com"
+              writedAt="2019-05-01"
             ></Preview>
             <Preview
               img="/static/banner-image.jpg"
@@ -73,6 +74,7 @@ export default () => {
               category="string"
               postLink="naver.com"
               categoryLink="github.com"
+              writedAt="2019-05-01"
             ></Preview>
           </HelloSubContainer>
         </HelloContainer>
