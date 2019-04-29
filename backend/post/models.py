@@ -15,7 +15,7 @@ class Post(models.Model):
     summery = models.CharField(max_length=200, blank=True)
     image = models.CharField(max_length=200, blank=True)
     writedAt = models.DateField(auto_now_add=True)
-    board = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
+    board = models.ForeignKey(SubCategory, on_delete=models.CASCADE, related_name='posts')
 
     def save(self, *args, **kwargs):
         soup = BeautifulSoup(self.content, 'html.parser')
