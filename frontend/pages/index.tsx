@@ -37,10 +37,25 @@ const HelloContent = styled.div`
 `
 
 const LinkContainer = styled.div`
+  height: 300px;
+  display: block;
+
+  @media (max-width: ${phoneMaxRowSize}) {
+    height: 200px;
+
+    i {
+      display: inline-block;
+      font-size: 3rem;
+      padding: 50px 0;
+      margin: 1rem;
+      color: white;
+    }
+  }
+
   i {
     display: inline-block;
-    vertical-align: middle;
-    font-size: 3rem;
+    font-size: 5rem;
+    padding: 70px 0;
     margin: 1rem;
     color: white;
   }

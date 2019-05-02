@@ -5,7 +5,7 @@ import {phoneMaxRowSize, tabletMaxRowSize, sidePaddingSize} from '../styles/layo
 const PreviewContainer = styled.div`
     width: 100%;
     max-width: ${tabletMaxRowSize};
-    padding: 0 10px;
+    padding: 10px;
     margin-bottom: ${sidePaddingSize};
     border-bottom: 0.3px solid #bbbbbb;
     display: block;
