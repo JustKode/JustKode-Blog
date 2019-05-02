@@ -40,6 +40,11 @@ class SubCommentSerializer(serializers.ModelSerializer):
         fields = ('id', 'parent', 'writer', 'email', 'content', 'writedAt')
 
 
+class SubCommentPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SubComment
+        fields = ('parent', 'writer', 'password', 'email', 'content')
+
 class CommentWithChildSerializer(serializers.ModelSerializer):
     subcomments = serializers.SerializerMethodField()
 
@@ -49,5 +54,5 @@ class CommentWithChildSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Comment
-        fields = ('id', 'post', 'writer', 'password', 'email', 'content', 'writedAt', 'subcomments')  
+        fields = ('id', 'post', 'writer', 'email', 'content', 'writedAt', 'subcomments')  
 
