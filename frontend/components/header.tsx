@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import styled from 'styled-components'
 import {mainColor} from '../styles/color'
 import {phoneMaxRowSize, tabletMaxRowSize, sidePaddingSize} from '../styles/layout'
+import Link from "next/link"
 
 const HeaderBox = styled.div`
     width: ${tabletMaxRowSize};
@@ -97,6 +98,12 @@ const MainContainer = styled.div`
   position: fixed;
   top: 0;
   background-color: white;
+
+  a {
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+  }
 `
 
 const Air = styled.div`
@@ -135,12 +142,12 @@ class Header extends Component<any, HeaderState> {
       <div style={{borderBottom: '0.3px solid #eeeeee'}}>
           <MainContainer>
               <HeaderBox>
-                <Banner>JUSTKODE</Banner>
+              <Link href="/"><Banner>JUSTKODE</Banner></Link>
                 <CustomButton className="fa fa-bars" onClick={this.onToggle}></CustomButton>
                 <ul className={`${this.state.check && 'checked'}`}>
-                    <li><ListElement>Home</ListElement></li>
-                    <li><ListElement>Info</ListElement></li>
-                    <li><ListElement>Post</ListElement></li>
+                  <Link href="/"><li><ListElement>Home</ListElement></li></Link>
+                  <Link href="/info"><li><ListElement>Info</ListElement></li></Link>
+                  <Link href="/post"><li><ListElement>Post</ListElement></li></Link>
                 </ul>
               </HeaderBox>
           </MainContainer>
