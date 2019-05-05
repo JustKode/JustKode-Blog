@@ -29,11 +29,11 @@ const HeaderBox = styled.div`
         display: block;
         width: 100px;
         text-align: right;
-        color: white;
         background-color: #444444;
       }
       ul.checked li>a{
         padding: 10px;
+        color: white;
       }
       ul.checked li>a:hover{
         color: white;

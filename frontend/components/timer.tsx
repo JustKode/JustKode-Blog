@@ -15,19 +15,29 @@ interface TimerState {
 }
 
 class Timer extends Component<any, TimerState> {
+    _isMounted = false
+    
     state = {
         time: new Date(),
         discharge: new Date('December 29, 2020')
     }
 
     update = () => {
-        this.setState({
-            time: new Date()
-        })
+        if (this._isMounted == true) {
+            this.setState({
+                time: new Date()
+            })
+        }
+        
     }
 
     componentDidMount() {
+        this._isMounted = true
         setInterval(this.update, 1000)
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false
     }
 
     render() {

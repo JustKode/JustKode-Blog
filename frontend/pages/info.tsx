@@ -50,29 +50,44 @@ const StackKind = styled.div`
 const Stack = styled.div`
   overflow: auto;
   text-align: left;
-  vertical-align: middle;
   margin: 10px;
+  height: 50px;
 
   img {
-    width: 48px;
+    width: calc(10% - 10px);
+    max-width: 40px;
     float: left;
-    margin: 10px;
+    margin-right: 10px;
+    max-height: 40px;
   }
 
   span {
     font-size: 0.7rem;
     color: #888888;
   }
+
+  span.left {
+    float: left;
+  }
+
+  span.right {
+    float: right;
+  }
+
+  &>div {
+    width: 90%;
+    display: inline-block;
+  }
 `
 
 const StackGauge = styled.div`
-  width: calc(90% - 10px);
-  background-color: gray;
-  display: inline-block;
+  width: 100%;
+  background-color: #444444;
   border-radius: 10px;
-
+  margin-top: 2px;
   div {
-    height: 20px;
+    height: 19px;
+    border-radius: 10px;
   }
 `
 
@@ -100,14 +115,139 @@ export default () => {
             </InfoContainer>
             <InfoContainer style={{backgroundColor: '#dddddd'}}>
               <InfoTitle><span>Development Stack</span></InfoTitle>
+              <InfoSubContainer>
+                <InfoContent>
+                    <h3>Percent Meaning?</h3>
+                    10% ~ 30%: 학습 중, 코드를 읽을 수 있는 수준<br/>
+                    30% ~ 50%: 프로젝트 진행이 가능 한 수준<br/>
+                    50% ~ 70%: 누군가를 가르칠 수 있는 수준<br/>
+                    70% ~ 100% : 남들이 못하는 걸 할 수 있는 수준<br/> 
+                </InfoContent>
+              </InfoSubContainer>
               <InfoContent>
                 <StackKind><span>Language</span></StackKind>
                 <Stack>
                   <img src="/static/python-logo.png"></img>
-                  <StackGauge>
-                    <div style={{width: '50%', backgroundColor: 'powderblue'}}></div>
-                  </StackGauge>
-                  <span>50%</span>
+                  <div>
+                    <StackGauge>
+                      <div style={{width: '65%', backgroundColor: '#376e9d'}}></div>
+                    </StackGauge>
+                    <div>
+                      <span className="left">Python</span>
+                      <span className="right">65%</span>
+                    </div>
+                  </div>
+                </Stack>
+                <Stack>
+                  <img src="/static/javascript-logo.png"></img>
+                  <div>
+                    <StackGauge>
+                      <div style={{width: '60%', backgroundColor: '#f0db4f'}}></div>
+                    </StackGauge>
+                    <div>
+                      <span className="left">JavaScript</span>
+                      <span className="right">60%</span>
+                    </div>
+                  </div>
+                </Stack>
+                <Stack>
+                  <img src="/static/cplusplus-logo.png"></img>
+                  <div>
+                    <StackGauge>
+                      <div style={{width: '55%', backgroundColor: '#0075c0'}}></div>
+                    </StackGauge>
+                    <div>
+                      <span className="left">C++</span>
+                      <span className="right">55%</span>
+                    </div>
+                  </div>
+                </Stack>
+                <StackKind><span>Frontend</span></StackKind>
+                <Stack>
+                  <img src="/static/react-logo.png"></img>
+                  <div>
+                    <StackGauge>
+                      <div style={{width: '50%', backgroundColor: '#00d8ff'}}></div>
+                    </StackGauge>
+                    <div>
+                      <span className="left">React</span>
+                      <span className="right">50%</span>
+                    </div>
+                  </div>
+                </Stack>
+                <Stack>
+                  <img src="/static/vue-logo.png"></img>
+                  <div>
+                    <StackGauge>
+                      <div style={{width: '30%', backgroundColor: '#41b883'}}></div>
+                    </StackGauge>
+                    <div>
+                      <span className="left">Vue.js</span>
+                      <span className="right">30%</span>
+                    </div>
+                  </div>
+                </Stack>
+                <StackKind><span>Backend</span></StackKind>
+                <Stack>
+                  <img src="/static/django-logo.jpg"></img>
+                  <div>
+                    <StackGauge>
+                      <div style={{width: '50%', backgroundColor: '#336645'}}></div>
+                    </StackGauge>
+                    <div>
+                      <span className="left">Django</span>
+                      <span className="right">50%</span>
+                    </div>
+                  </div>
+                </Stack>
+                <Stack>
+                  <img src="/static/nodejs-logo.png"></img>
+                  <div>
+                    <StackGauge>
+                      <div style={{width: '50%', backgroundColor: '#83cd29'}}></div>
+                    </StackGauge>
+                    <div>
+                      <span className="left">Node.js</span>
+                      <span className="right">50%</span>
+                    </div>
+                  </div>
+                </Stack>
+                <Stack>
+                  <img src="/static/flask-logo.png"></img>
+                  <div>
+                    <StackGauge>
+                      <div style={{width: '40%', backgroundColor: '#003960'}}></div>
+                    </StackGauge>
+                    <div>
+                      <span className="left">Flask</span>
+                      <span className="right">40%</span>
+                    </div>
+                  </div>
+                </Stack>
+                <StackKind><span>Data Science</span></StackKind>
+                <Stack>
+                  <img src="/static/numpy-logo.png"></img>
+                  <div>
+                    <StackGauge>
+                      <div style={{width: '20%', backgroundColor: '#3657b4'}}></div>
+                    </StackGauge>
+                    <div>
+                      <span className="left">Numpy</span>
+                      <span className="right">20%</span>
+                    </div>
+                  </div>
+                </Stack>
+                <Stack>
+                  <img src="/static/pytorch-logo.png"></img>
+                  <div>
+                    <StackGauge>
+                      <div style={{width: '10%', backgroundColor: '#ee4c2c'}}></div>
+                    </StackGauge>
+                    <div>
+                      <span className="left">Pytorch</span>
+                      <span className="right">10%</span>
+                    </div>
+                  </div>
                 </Stack>
               </InfoContent>
             </InfoContainer>
