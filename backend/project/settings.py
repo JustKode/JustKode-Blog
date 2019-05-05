@@ -40,11 +40,13 @@ INSTALLED_APPS = [
     'rest_framework',
     'ckeditor',
     'ckeditor_uploader',
+    'corsheaders',
     'board.apps.BoardConfig',
     'post.apps.PostConfig'
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -130,3 +132,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 
 CKEDITOR_UPLOAD_PATH = 'ckeditor/'
 CKEDITOR_FILENAME_GENERATOR = 'project.utils.getfilename'
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = False
