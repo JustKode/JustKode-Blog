@@ -7,6 +7,13 @@ from post.serializer import PostSimpleSerializer
 from post.models import Post, Comment, SubComment
 
 
+class AllPostView(APIView):
+    def get(self, request, page=1, format=None):
+        posts = Post.objects.all()[(page-1)*10:page*10]
+        serializer = PostSimpleSerializer(instance=posts, many=True)
+        return Response(serializer.data)
+
+
 class BoardListView(APIView):
     def get(self, request, format=None):
         categorys = Category.objects.all()
@@ -18,7 +25,7 @@ class CategoryListView(APIView):
     def get(self, request, url, format=None):
         try:
             category = Category.objects.get(url=url)
-            serializer = CategoryWithChildSerializer(instane=category)
+            serializer = CategoryWithChildSerializer(instance=category)
             return Response(serializer.data)
         except Category.DoesNotExist:
             return Response({"message": "category does not exist"}, status=status.HTTP_404_NOT_FOUND)

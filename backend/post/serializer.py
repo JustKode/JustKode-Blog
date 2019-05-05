@@ -7,19 +7,32 @@ from post.models import Post, Comment, SubComment
 class PostSimpleSerializer(serializers.ModelSerializer):
     parent_url = serializers.CharField(read_only=True, source="parent.full_url")
     parent_name = serializers.CharField(read_only=True, source="parent.full_name")
+    comment_count = serializers.SerializerMethodField()
+
+    def get_comment_count(self, instance):
+        comments = Comment.objects.filter(post=instance)
+        subcomments = SubComment.objects.filter(parent__in=comments)
+        return comments.count() + subcomments.count()
     
     class Meta:
         model = Post
-        fields = ('id', 'title', 'summary', 'image', 'parent_url', 'parent_name')
+        fields = ('id', 'title', 'summary', 'image', 'parent_url', 'parent_name', 'comment_count')
 
 
 class PostSerializer(serializers.ModelSerializer):
     parent_url = serializers.CharField(read_only=True, source="parent.full_url")
     parent_name = serializers.CharField(read_only=True, source="parent.full_name")
+
+    comment_count = serializers.SerializerMethodField()
+
+    def get_comment_count(self, instance):
+        comments = Comment.objects.filter(post=instance)
+        subcomments = SubComment.objects.filter(parent__in=comments)
+        return comments.count() + subcomments.count()
     
     class Meta:
         model = Post
-        fields = ('id', 'title', 'writedAt', 'content', 'image', 'parent_url', 'parent_name')
+        fields = ('id', 'title', 'writedAt', 'content', 'image', 'parent_url', 'parent_name', 'comment_count')
 
 
 class CommentSerializer(serializers.ModelSerializer):
@@ -44,6 +57,7 @@ class SubCommentPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = SubComment
         fields = ('parent', 'writer', 'password', 'email', 'content')
+
 
 class CommentWithChildSerializer(serializers.ModelSerializer):
     subcomments = serializers.SerializerMethodField()
