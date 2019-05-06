@@ -9,7 +9,7 @@ from post.models import Post, Comment, SubComment
 
 class AllPostView(APIView):
     def get(self, request, page=1, format=None):
-        posts = Post.objects.all()[(page-1)*10:page*10]
+        posts = Post.objects.order_by('-id')[(page-1)*10:page*10]
         serializer = PostSimpleSerializer(instance=posts, many=True)
         return Response(serializer.data)
 

@@ -5,8 +5,9 @@ from post.models import Post, Comment, SubComment
 
 
 class PostSimpleSerializer(serializers.ModelSerializer):
-    parent_url = serializers.CharField(read_only=True, source="parent.full_url")
-    parent_name = serializers.CharField(read_only=True, source="parent.full_name")
+    category_url = serializers.CharField(source="board.full_url")
+    category_name = serializers.CharField(source="board.full_name")
+    
     comment_count = serializers.SerializerMethodField()
 
     def get_comment_count(self, instance):
@@ -16,12 +17,12 @@ class PostSimpleSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Post
-        fields = ('id', 'title', 'summary', 'image', 'parent_url', 'parent_name', 'comment_count')
+        fields = ('id', 'title', 'writedAt', 'summary', 'image', 'category_url', 'category_name', 'comment_count')
 
 
 class PostSerializer(serializers.ModelSerializer):
-    parent_url = serializers.CharField(read_only=True, source="parent.full_url")
-    parent_name = serializers.CharField(read_only=True, source="parent.full_name")
+    category_url = serializers.CharField(source="board.full_url")
+    category_name = serializers.CharField(source="board.full_name")
 
     comment_count = serializers.SerializerMethodField()
 
@@ -32,7 +33,7 @@ class PostSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Post
-        fields = ('id', 'title', 'writedAt', 'content', 'image', 'parent_url', 'parent_name', 'comment_count')
+        fields = ('id', 'title', 'writedAt', 'content', 'image', 'category_url', 'category_name', 'comment_count')
 
 
 class CommentSerializer(serializers.ModelSerializer):

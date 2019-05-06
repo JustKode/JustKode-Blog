@@ -1,4 +1,5 @@
 import * as React from "react"
+import Head from 'next/head'
 import Layout from "../components/layout"
 import Banner from "../components/banner"
 import Preview from "../components/preview"
@@ -11,11 +12,8 @@ const HelloContainer = styled.div`
 
 const HelloSubContainer = styled.div`
   display: inline-block;
-  width: ${tabletMaxRowSize};
-
-  @media (max-width: ${tabletMaxRowSize}) {
-    width: 100%;
-  }
+  width: 100%;
+  max-width: ${tabletMaxRowSize};
   margin: 20px 0;
 `
 
@@ -65,6 +63,9 @@ const LinkContainer = styled.div`
 export default () => {
   return (
     <Layout>
+      <Head>
+        <title>Hello! JustKode!</title>
+      </Head>
         <Banner></Banner>
         <HelloContainer>
           <HelloSubContainer>
@@ -84,7 +85,7 @@ export default () => {
               commentCount={1}
               content="string"
               category="string"
-              postLink="naver.com"
+              postId={1}
               categoryLink="github.com"
               writedAt="2019-05-01"
             ></Preview>
@@ -94,7 +95,7 @@ export default () => {
               commentCount={3}
               content="나는 빡빡이다 나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다"
               category="string"
-              postLink="naver.com"
+              postId={1}
               categoryLink="github.com"
               writedAt="2019-05-01"
             ></Preview>

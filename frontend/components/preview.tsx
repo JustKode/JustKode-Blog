@@ -1,6 +1,8 @@
 import {Component} from 'react'
 import styled from 'styled-components'
 import {phoneMaxRowSize, tabletMaxRowSize, sidePaddingSize} from '../styles/layout'
+import routes from '../routes'
+const {Link, Route} = routes
 
 const PreviewContainer = styled.div`
     width: 100%;
@@ -80,7 +82,7 @@ interface PreviewProps {
     content: string,
     category: string,
     writedAt: string,
-    postLink: string,
+    postId: number,
     categoryLink: string,
 }
 
@@ -89,14 +91,16 @@ class Preview extends Component<PreviewProps, any> {
         return (
             <PreviewContainer>
                 <PreviewSubContainer>
-                    <a href={this.props.postLink}>
-                        <PreviewTitle>{this.props.title} <span>[{this.props.commentCount}]</span></PreviewTitle>
-                        <PreviewContent>{this.props.content}</PreviewContent>
-                    </a>
+                    <Link route='post' params={{postId: `${this.props.postId}`}}>
+                        <div style={{cursor: 'pointer'}}>
+                            <PreviewTitle>{this.props.title} <span>[{this.props.commentCount}]</span></PreviewTitle>
+                            <PreviewContent>{this.props.content}</PreviewContent>
+                        </div>
+                    </Link>
                     <PreviewBottom>
                         <span>
                             <i className="far fa-folder-open"></i>
-                            <a href={this.props.categoryLink}><span> {this.props.category}</span></a>
+                            <Link href={this.props.categoryLink}><span> {this.props.category}</span></Link>
                         </span>
                         <span>
                             <i className="far fa-clock"></i>
@@ -104,7 +108,9 @@ class Preview extends Component<PreviewProps, any> {
                         </span>    
                     </PreviewBottom>
                 </PreviewSubContainer>
-                <PreviewImg src={this.props.img}></PreviewImg>
+                <Link route='post' params={{postId: `${this.props.postId}`}}>
+                    <PreviewImg src={this.props.img} style={{cursor: 'pointer'}}></PreviewImg>
+                </Link>
             </PreviewContainer>
         )
     }   

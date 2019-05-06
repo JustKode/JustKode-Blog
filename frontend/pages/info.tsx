@@ -1,4 +1,5 @@
 import * as React from "react"
+import Head from 'next/head'
 import Layout from "../components/layout"
 import Banner from "../components/banner"
 import Timer from "../components/timer"
@@ -94,6 +95,9 @@ const StackGauge = styled.div`
 export default () => {
     return (
         <Layout>
+          <Head>
+            <title>I'm JustKode!</title>
+          </Head>
             <Banner></Banner>
             <InfoContainer>
                 <InfoSubContainer>
