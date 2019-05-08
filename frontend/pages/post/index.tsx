@@ -4,6 +4,7 @@ import Error from 'next/error'
 import Layout from "../../components/layout"
 import Banner from "../../components/banner"
 import Preview from "../../components/preview"
+import Comments from "../../components/commentBox"
 import styled from "styled-components"
 import axios from 'axios'
 import {apiServer} from '../../env'
@@ -64,35 +65,26 @@ const CommentBox = styled.div`
   text-align: left;
 `
 
-const Comment = styled.div`
-  border-bottom: 0.3px solid #bbbbbb;
-`
-
-const SubComment = styled.div`
-  margin-left: 2rem;
-  border-bottom: 0.3px solid #bbbbbb;
-`
-
-const CommentBar = styled.div`
-  margin: 1rem;
-`
-
-const CommentContents = styled.div`
-  margin: 1rem;
-`
-
 
 class Post extends Component<any, any> {
   static async getInitialProps({ query }: any) {
     try {
       const post = await axios.get(apiServer + `/post/${query.postId}`)
       return {
+        id: query.postId,
         post: post.data.post,
-        comments: post.data.comments
+        comments: post.data.comments,
       }
     } catch (err) {
       return {error: err.response.status}
     }
+  }
+
+  constructor(props: any) {
+    super(props)
+    this.setState({
+      comments: this.props.comments
+    })
   }
 
   render() {
@@ -100,34 +92,6 @@ class Post extends Component<any, any> {
     if (this.props.error) {
       return (<Error statusCode={this.props.error} />)
     }
-
-    const comments = this.props.comments.map((comment: any, c_id: number) => {
-      const subcomments = comment.subcomments.map((subcomment: any, sc_id: number) => {
-        return (
-          <SubComment key={sc_id}>
-            <CommentBar>
-              {subcomment.writer}
-            </CommentBar>
-            <CommentContents>
-              {subcomment.content}
-            </CommentContents>
-          </SubComment>
-        )
-      })
-      return (
-        <div>
-          <Comment key={c_id}>
-            <CommentBar>
-              {comment.writer}
-            </CommentBar>
-            <CommentContents>
-              {comment.content}
-            </CommentContents>
-          </Comment>
-          {subcomments}
-        </div>
-      )
-    })
 
     return (
       <Layout>
@@ -144,15 +108,12 @@ class Post extends Component<any, any> {
                 <span>{this.props.post.writedAt}</span>
               </span>    
               <span>
-                <i class="fas fa-comments"></i>
+                <i className="fas fa-comments"></i>
                 <span>{this.props.post.comment_count}</span>
               </span>
             </PostInfo>
             <Content dangerouslySetInnerHTML={ {__html: this.props.post.content} }></Content>
-            <CommentBox>
-              <SubTitle>{this.props.post.comment_count}개 댓글</SubTitle>
-              {comments}
-            </CommentBox>
+            <Comments id={this.state.id} comments={this.state.comments}/>
           </SubContainer>
         </MainContainer>
       </Layout>

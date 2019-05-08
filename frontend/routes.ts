@@ -4,4 +4,4 @@ route
 .add('info')
 .add('post', '/post/:postId')
 
-export default route
+module.exports = route
