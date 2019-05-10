@@ -83,7 +83,8 @@ class Comment extends Component<CommentProps, any> {
 
     modifyButton = () => {
         this.setState({
-            changing: !this.state.changing
+            changing: !this.state.changing,
+            removing: false
         })
     }
 
@@ -105,17 +106,50 @@ class Comment extends Component<CommentProps, any> {
 
     removeButton = () => {
         this.setState({
-            changing: !this.state.changing
+            changing: false,
+            removing: !this.state.removing
+        })
+    }
+
+    handleChange = (e: any) => {
+        this.setState({
+            [e.target.name]: e.target.value
         })
     }
 
     render() {
-        return (
-            <CommentContainer>
-                <CommentTop>{this.state.comment.writer}</CommentTop>
-                <CommentContainer>{this.state.comment.content}</CommentContainer>
-            </CommentContainer>
-        )
+        if (this.state.changing) {
+            return (
+                <CommentContainer>
+                    <CommentTop>{this.state.comment.writer}</CommentTop>
+                    <CommentContents>{this.state.comment.content}</CommentContents>
+                </CommentContainer>
+            )
+        }
+        else if (this.state.removing) {
+            return (
+                <CommentContainer>
+                    <CommentTop>
+                        <span>{this.state.comment.writer}</span>
+                        <i className="far fa-edit"></i>
+                        <i className="fas fa-times"></i>
+                    </CommentTop>
+                    <input value={this.state.comment.content} onChange={this.handleChange} />
+                </CommentContainer>
+            )
+        }
+        else {
+            return (
+                <CommentContainer>
+                    <CommentTop>
+                        <span>{this.state.comment.writer}</span>
+                        <i className="far fa-edit" onClick={this.modifyButton}></i>
+                        <i className="fas fa-times" onClick={this.removeButton}></i>
+                    </CommentTop>
+                    <CommentContents>{this.state.comment.content}</CommentContents>
+                </CommentContainer>
+            )
+        }
     }
 }
 
