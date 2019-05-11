@@ -1,9 +1,12 @@
 import React, {Component} from "react"
 import styled from "styled-components"
-import comment from "./comment"
+import Comment from "./comment"
 import {apiServer} from "../env"
 import Axios from "axios";
 
+const MainContainer = styled.div`
+  text-align: left;
+`
 
 interface CommentProps {
   id: string,
@@ -13,9 +16,9 @@ interface CommentProps {
 class Comments extends Component<CommentProps, any> {
   constructor(props: CommentProps) {
     super(props)
-    this.setState({
+    this.state = {
       comments: this.props.comments
-    })
+    }
   }
 
   getComments = async () => {
@@ -34,15 +37,15 @@ class Comments extends Component<CommentProps, any> {
       const subcomments = comment.subcomments.map((subcomment: any, i: number) => {
         return (<div>What</div>)
       })
-      return ({
-
-      })
+      return (
+        <Comment comment={comment} reset={this.getComments} />
+      )
     })
 
     return (
-        <div>
-            헤헤
-        </div>
+        <MainContainer>
+            {comments}
+        </MainContainer>
     ) 
   }
 }

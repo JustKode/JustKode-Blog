@@ -9,8 +9,8 @@ import styled from "styled-components"
 import axios from 'axios'
 import {apiServer} from '../../env'
 import {phoneMaxRowSize, tabletMaxRowSize, sidePaddingSize} from '../../styles/layout'
-import routes from '../../routes'
-const {Link, Route} = routes
+import route from '../../routes'
+const {Link, Route} = route
 
 const MainContainer = styled.div`
   text-align: center;
@@ -82,9 +82,9 @@ class Post extends Component<any, any> {
 
   constructor(props: any) {
     super(props)
-    this.setState({
+    this.state = {
       comments: this.props.comments
-    })
+    }
   }
 
   render() {
@@ -113,7 +113,7 @@ class Post extends Component<any, any> {
               </span>
             </PostInfo>
             <Content dangerouslySetInnerHTML={ {__html: this.props.post.content} }></Content>
-            <Comments id={this.state.id} comments={this.state.comments}/>
+            <Comments id={this.props.id} comments={this.state.comments}/>
           </SubContainer>
         </MainContainer>
       </Layout>
