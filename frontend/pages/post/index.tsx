@@ -9,7 +9,7 @@ import styled from "styled-components"
 import axios from 'axios'
 import {apiServer} from '../../env'
 import {phoneMaxRowSize, tabletMaxRowSize, sidePaddingSize} from '../../styles/layout'
-import route from '../../routes'
+const route = require('../../routes')
 const {Link, Route} = route
 
 const MainContainer = styled.div`
@@ -61,6 +61,10 @@ const Content = styled.div`
   border-top: 0.3px solid #bbbbbb;
 `
 
+const PostCommentBox = styled.div`
+
+`
+
 const CommentBox = styled.div`
   text-align: left;
 `
@@ -80,15 +84,7 @@ class Post extends Component<any, any> {
     }
   }
 
-  constructor(props: any) {
-    super(props)
-    this.state = {
-      comments: this.props.comments
-    }
-  }
-
   render() {
-    console.log(this.props.post)
     if (this.props.error) {
       return (<Error statusCode={this.props.error} />)
     }
@@ -106,14 +102,14 @@ class Post extends Component<any, any> {
               <span>
                 <i className="far fa-clock"></i>
                 <span>{this.props.post.writedAt}</span>
-              </span>    
+              </span>
               <span>
                 <i className="fas fa-comments"></i>
                 <span>{this.props.post.comment_count}</span>
               </span>
             </PostInfo>
             <Content dangerouslySetInnerHTML={ {__html: this.props.post.content} }></Content>
-            <Comments id={this.props.id} comments={this.state.comments}/>
+            <Comments id={this.props.id} comments={this.props.comments} count={this.props.post.comment_count} />
           </SubContainer>
         </MainContainer>
       </Layout>

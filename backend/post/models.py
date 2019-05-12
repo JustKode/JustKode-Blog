@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.hashers import check_password, make_password
 from ckeditor_uploader.fields import RichTextUploadingField
 from bs4 import BeautifulSoup
 from board.models import SubCategory
@@ -67,6 +68,11 @@ class Comment(models.Model):
     content = models.TextField()
     writedAt = models.DateTimeField(auto_now_add=True)
 
+    def save(self, *args, **kwargs):
+        if self.pk is None:
+            self.password = make_password(self.password)
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return self.writer + ": " + self.content
 
@@ -78,6 +84,11 @@ class SubComment(models.Model):
     email = models.EmailField()
     content = models.TextField()
     writedAt = models.DateTimeField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+        if self.pk is None:
+            self.password = make_password(self.password)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.writer + ": " + self.content

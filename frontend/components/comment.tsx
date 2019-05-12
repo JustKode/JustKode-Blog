@@ -74,7 +74,7 @@ class Comment extends Component<CommentProps, any> {
 
     modify = async () => {
         try {
-            const res = await axios.put(apiServer + `/comment/${this.props.comment.id}/`, {
+            const res = await axios.put(apiServer + `/post/comment/${this.props.comment.id}`, {
                 password: this.state.password,
                 content: this.state.comment.content
             })
@@ -104,7 +104,7 @@ class Comment extends Component<CommentProps, any> {
 
     remove = async () => {
         try {
-            const res = await axios.delete(apiServer + `/comment/${this.props.comment.id}/`, {
+            const res = await axios.delete(apiServer + `/post/comment/${this.props.comment.id}`, {
                 data: {password: this.state.password}
             })
             alert("성공적으로 변경 되었습니다.")
@@ -133,7 +133,7 @@ class Comment extends Component<CommentProps, any> {
 
     subcomment = async () => {
         try {
-            const subcomment = await axios.post(apiServer + `/comment/${this.state.comment}`, {
+            const subcomment = await axios.post(apiServer + `/post/comment/${this.state.comment}`, {
                 writer: this.state.subwriter,
                 password: this.state.subpassword,
                 email: this.state.subemail,
@@ -170,6 +170,7 @@ class Comment extends Component<CommentProps, any> {
                     </CommentTop>
                     <input value={this.props.comment.content} placeholder="내용을 입력 해 주세요." onChange={this.handleChange} name='content' />
                     <input value={this.state.password} placeholder="비밀번호" onChange={this.handleChange} name='password' />
+                    <input type="button" onClick={this.modify} value="제출" />
                 </CommentContainer>
             )
         }
@@ -184,6 +185,7 @@ class Comment extends Component<CommentProps, any> {
                     </CommentTop>
                     <CommentContents>{this.props.comment.content}</CommentContents>
                     <input value={this.state.password} placeholder="비밀번호" onChange={this.handleChange} name='password' />
+                    <input type="button" onClick={this.remove} value="제출" />
                 </CommentContainer>
             )
         }
@@ -202,6 +204,7 @@ class Comment extends Component<CommentProps, any> {
                         <input value={this.state.subwriter} placeholder="작성자" onChange={this.handleChange} name='subwriter' />
                         <input value={this.state.subemail} placeholder="이메일" onChange={this.handleChange} name='subemail' />
                         <input value={this.state.subpassword} placeholder="비밀번호" onChange={this.handleChange} name='subpassword' />
+                        <input type="button" onClick={this.subcomment} value="제출" />
                     </SubCommentContainer>
                 </CommentContainer>
             )

@@ -31,6 +31,7 @@ class PostCommentView(APIView):
 
             comments = Comment.objects.filter(post=post)
             comment_serializer = CommentWithChildSerializer(comments, many=True)
+            
             return Response(comment_serializer.data)
         except Post.DoesNotExist:
             return Response({"message": "post does not exist"}, status=status.HTTP_404_NOT_FOUND)
@@ -46,7 +47,6 @@ class PostCommentView(APIView):
             if all(i in request.data for i in required_key):
                 temp_dict = {'post': id}
                 temp_dict.update(request.data)
-                temp_dict['password'] = make_password(temp_dict['password'])
                 
                 comment = CommentPostSerializer(data=temp_dict)
                 if comment.is_valid():
@@ -74,7 +74,6 @@ class CommentView(APIView):
             if all(i in request.data for i in required_key):
                 temp_dict = {'parent': id}
                 temp_dict.update(request.data)
-                temp_dict['password'] = make_password(temp_dict['password'])
 
                 subcomment = SubCommentPostSerializer(data=temp_dict)
                 if subcomment.is_valid():
