@@ -1,7 +1,7 @@
 import {Component} from 'react'
 import styled from 'styled-components'
 import {phoneMaxRowSize, tabletMaxRowSize, sidePaddingSize} from '../styles/layout'
-import routes from '../routes'
+const routes = require('../routes')
 const {Link, Route} = routes
 
 const PreviewContainer = styled.div`

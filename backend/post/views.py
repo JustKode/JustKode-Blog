@@ -133,7 +133,7 @@ class SubCommentView(APIView):
         
     def put(self, request, id):
         try:
-            subcomment = SubCategory.objects.get(pk=id)
+            subcomment = SubComment.objects.get(pk=id)
             required_key = ('content', 'password')
             if all(i in request.data for i in required_key):
                 if check_password(request.data['password'], subcomment.password):

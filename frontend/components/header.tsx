@@ -2,7 +2,9 @@ import React, {Component} from 'react'
 import styled from 'styled-components'
 import {mainColor} from '../styles/color'
 import {phoneMaxRowSize, tabletMaxRowSize, sidePaddingSize} from '../styles/layout'
-import Link from "next/link"
+const route = require('../routes')
+const {Link, Route} = route
+
 
 const HeaderBox = styled.div`
     width: ${tabletMaxRowSize};
@@ -142,12 +144,12 @@ class Header extends Component<any, HeaderState> {
       <div style={{borderBottom: '0.3px solid #eeeeee'}}>
           <MainContainer>
               <HeaderBox>
-              <Link href="/"><Banner>JUSTKODE</Banner></Link>
+              <Link route="/"><Banner>JUSTKODE</Banner></Link>
                 <CustomButton className="fa fa-bars" onClick={this.onToggle}></CustomButton>
                 <ul className={`${this.state.check && 'checked'}`}>
-                  <Link href="/"><li><ListElement>Home</ListElement></li></Link>
-                  <Link href="/info"><li><ListElement>Info</ListElement></li></Link>
-                  <Link href="/post"><li><ListElement>Post</ListElement></li></Link>
+                  <Link route="/"><li><ListElement>Home</ListElement></li></Link>
+                  <Link route="/info"><li><ListElement>Info</ListElement></li></Link>
+                  <Link route="/post"><li><ListElement>Post</ListElement></li></Link>
                 </ul>
               </HeaderBox>
           </MainContainer>

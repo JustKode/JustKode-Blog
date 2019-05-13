@@ -1,7 +1,9 @@
-import React, {Component} from "react"
+import React, {Component, Fragment} from "react"
 import styled from "styled-components"
 import Comment from "./comment"
+import SubComment from "./subcomment"
 import {apiServer} from "../env"
+import {phoneMaxRowSize, tabletMaxRowSize, sidePaddingSize} from '../styles/layout'
 import axios from 'axios'
 
 const MainContainer = styled.div`
@@ -9,11 +11,49 @@ const MainContainer = styled.div`
 `
 
 const TopContainer = styled.div`
-
+  font-size: 1.3rem;
+  font-weight: bold;
+  border-bottom: 1px solid black;
+  padding: 4px;
 `
 
 const CommentPostContainer = styled.div`
+  input {
+    padding: 4px 8px;
+    width: 308px;
+    box-sizing: border-box;
+    margin: 4px;
+  }
 
+  textarea {
+    width: 1000px;
+    padding: 4px 8px;
+    line-height: 3;
+    display: block;
+    box-sizing: border-box;
+    margin: 4px;
+  }
+
+  input[type=button] {
+    width: 100px;
+    border: none;
+    background-color: #00091a;
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  @media (max-width: ${tabletMaxRowSize}) {
+    input {
+      display: block;
+    }
+
+    textarea {
+      width: 90%;
+      min-width: 308px;
+    }
+  }
 `
 
 interface CommentProps {
@@ -37,15 +77,15 @@ class Comments extends Component<CommentProps, any> {
 
   getComments = async () => {
     try {
-      const comments: any = await axios.get(apiServer + `/${this.props.id}/comments`)
-
-      let count = comments.length
-      for (let i = 0; i < comments.length; i++) {
-        count += comments[i].subcomments.length
+      const comments: any = await axios.get(apiServer + `/post/${this.props.id}/comments`)
+    
+      let count = comments.data.length
+      for (let i = 0; i < comments.data.length; i++) {
+        count += comments.data[i].subcomments.length
       }
       this.setState({
         count: count,
-        comments: comments
+        comments: comments.data
       })
     } catch (e) {
       alert('예기치 않은 오류가 발생 했습니다.')
@@ -60,14 +100,14 @@ class Comments extends Component<CommentProps, any> {
         password: this.state.password,
         email: this.state.email
       })
-      alert('성공적으로 댓글이 등록 되었습니다.')
       this.setState({
         content: '',
         writer: '',
         password: '',
         email: '',
       })
-      this.getComments()
+      await this.getComments()
+      alert('성공적으로 댓글이 등록 되었습니다.')
     } catch (e) {
       if (e.status == 400) {alert('모든 정보를 입력 해 주세요')} 
     }
@@ -81,12 +121,15 @@ class Comments extends Component<CommentProps, any> {
 
 
   render() {
-    const comments = this.props.comments.map((comment: any, i: number) => {
+    const comments = this.state.comments.map((comment: any, i: number) => {
       const subcomments = comment.subcomments.map((subcomment: any, j: number) => {
-        return (<div>What</div>)
+        return (<SubComment key={j} comment={subcomment} reset={this.getComments} />)
       })
       return (
-        <Comment key={i} comment={comment} reset={this.getComments} />
+        <Fragment key={i}>
+          <Comment key={i} comment={comment} reset={this.getComments} />
+          {subcomments}
+        </Fragment>
       )
     })
 
@@ -96,11 +139,11 @@ class Comments extends Component<CommentProps, any> {
           {this.state.count}개 댓글
         </TopContainer>
         <CommentPostContainer>
-          <input value={this.state.writer} onChange={this.handleChange} name="writer" placeholder="작성자" />
+          <input type="text" value={this.state.writer} onChange={this.handleChange} name="writer" placeholder="작성자" />
           <input type="email" value={this.state.email} onChange={this.handleChange} name="email" placeholder="이메일" />
           <input type="password" value={this.state.password} onChange={this.handleChange} name="password" placeholder="비밀 번호" />
           <textarea placeholder="댓글을 입력 해 주세요" value={this.state.content} onChange={this.handleChange} name="content" />
-          <input type="button" onClick={this.postComment}/>
+          <input type="button" onClick={this.postComment} value="작성" />
         </CommentPostContainer>
         {comments}
       </MainContainer>
