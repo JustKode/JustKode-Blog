@@ -45,7 +45,6 @@ class CategoryAll extends Component<any, any> {
   static async getInitialProps({ query }: any) {
     try {
       const posts = await axios.get(apiServer + `/board/${query.category}/${query.page}/`)
-      console.log(posts.data)
       return {
         posts: posts.data.posts,
         page: Number(query.page),
@@ -53,7 +52,7 @@ class CategoryAll extends Component<any, any> {
       }
     } catch (e) {
       return {
-          error: e.status
+          error: e.response.status
       }
     }
   }

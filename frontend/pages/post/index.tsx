@@ -29,14 +29,6 @@ const Title = styled.div`
   text-align: left;
 `
 
-const SubTitle = styled.div`
-  font-size: 1.3rem;
-  font-weight: bold;
-  text-align: left;
-  border-bottom: 0.2rem solid black;
-  padding: 1rem;
-`
-
 const PostInfo = styled.div`
   padding: 1rem;
   text-align: left;
@@ -60,15 +52,6 @@ const Content = styled.div`
 
   border-top: 0.3px solid #bbbbbb;
 `
-
-const PostCommentBox = styled.div`
-
-`
-
-const CommentBox = styled.div`
-  text-align: left;
-`
-
 
 class Post extends Component<any, any> {
   static async getInitialProps({ query }: any) {

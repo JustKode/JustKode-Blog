@@ -54,7 +54,7 @@ class SubCategoryAll extends Component<any, any> {
       }
     } catch (e) {
       return {
-          error: e.status
+          error: e.response.status
       }
     }
   }
