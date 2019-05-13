@@ -43,11 +43,10 @@ const MorePost = styled.div`
 class IndexAll extends Component<any, any> {
   static async getInitialProps({ query }: any) {
     try {
-      const posts = await axios.get(apiServer + `/board/all/${query.page}`)
-      console.log(posts.data)
+      const posts = await axios.get(apiServer + `/board/all/${query.page || 1}`)
       return {
         posts: posts.data,
-        page: Number(query.page)
+        page: Number(query.page || 1)
       }
     } catch (e) {
       return {

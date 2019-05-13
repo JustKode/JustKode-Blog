@@ -22,6 +22,8 @@ const FooterLinkBox = styled.div`
 `
 
 const FooterLink = styled.a`
+    color: black;
+    text-decoration: none;
     &:hover {
         color: ${mainColor}
     }
@@ -35,9 +37,9 @@ const Footer = (): JSX.Element => {
             <FooterBanner>JUSTKODE</FooterBanner>
             <FooterContext>Copyright © <strong>JUSTKODE</strong> All rights reserved.</FooterContext>
             <FooterLinkBox>
-                <FooterLink>Github</FooterLink>
-                <FooterLink style={{borderLeft: '0.2px solid #dddddd', borderRight: '0.2px solid #dddddd'}}>Facebook</FooterLink>
-                <FooterLink>Instagram</FooterLink>
+                <FooterLink href="https://github.com/JustKode">Github</FooterLink>
+                <FooterLink href="https://www.facebook.com/profile.php?id=100014409812788"style={{borderLeft: '0.2px solid #dddddd', borderRight: '0.2px solid #dddddd'}}>Facebook</FooterLink>
+                <FooterLink href="https://www.instagram.com/0ccean/">Instagram</FooterLink>
             </FooterLinkBox>
         </FooterBox>
     )
