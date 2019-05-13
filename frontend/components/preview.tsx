@@ -100,7 +100,7 @@ class Preview extends Component<PreviewProps, any> {
                     <PreviewBottom>
                         <span>
                             <i className="far fa-folder-open"></i>
-                            <Link href={this.props.categoryLink}><span> {this.props.category}</span></Link>
+                            <Link route={`/board/${this.props.categoryLink}/1/`}><span> {this.props.category}</span></Link>
                         </span>
                         <span>
                             <i className="far fa-clock"></i>

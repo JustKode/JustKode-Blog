@@ -1,12 +1,13 @@
 import React, {Component, Fragment} from "react"
 import Error from 'next/error'
-import Layout from "../../../components/layout"
-import Preview from "../../../components/preview"
+import Layout from "../../components/layout"
+import Banner from "../../components/banner"
+import Preview from "../../components/preview"
 import styled from "styled-components"
 import axios from 'axios'
-import {apiServer} from '../../../env'
-import {phoneMaxRowSize, tabletMaxRowSize, sidePaddingSize} from '../../../styles/layout'
-const route = require('../../../routes')
+import {apiServer} from '../../env'
+import {phoneMaxRowSize, tabletMaxRowSize, sidePaddingSize} from '../../styles/layout'
+const route = require('../../routes')
 const {Link, Route} = route
 
 const MainContainer = styled.div`
@@ -40,26 +41,27 @@ const MorePost = styled.div`
   }
 `
 
-class IndexAll extends Component<any, any> {
+class CategoryAll extends Component<any, any> {
   static async getInitialProps({ query }: any) {
     try {
-      const posts = await axios.get(apiServer + `/board/all/${query.page}`)
+      const posts = await axios.get(apiServer + `/board/${query.category}/${query.page}/`)
       console.log(posts.data)
       return {
-        posts: posts.data,
-        page: Number(query.page)
+        posts: posts.data.posts,
+        page: Number(query.page),
+        category: posts.data.category
       }
     } catch (e) {
       return {
-        error: e.status
+          error: e.status
       }
     }
   }
 
   render() {
     if (this.props.error) {
-      return (<Error statusCode={this.props.error} />)
-    }
+        return (<Error statusCode={this.props.error} />)
+    }  
 
     let postlist
 
@@ -87,16 +89,16 @@ class IndexAll extends Component<any, any> {
       <Layout>
         <MainContainer>
           <SubContainer>
-            <Title><span>Recent Post : Page {this.props.page}</span></Title>
+            <Title><span>{this.props.category.name} : Page {this.props.page}</span></Title>
             {postlist}
             <MorePost>
               {this.props.page > 1 && (
-                <Link route="post/list" params={{page: this.props.page - 1}}>
+                <Link route="board/category" params={{category: this.props.category.url, page: this.props.page - 1}}>
                   <span><i className="fas fa-caret-left"></i> 이전</span>
                 </Link>
                 )}
               {(this.props.posts.length === 10 && this.props.page >= 1) && (
-                <Link route="post/list" params={{page: this.props.page + 1}}>
+                <Link route="board/category" params={{category: this.props.category.url, page: this.props.page + 1}}>
                   <span>다음 <i className="fas fa-caret-right"></i></span>
                 </Link>
               )}
@@ -108,4 +110,4 @@ class IndexAll extends Component<any, any> {
   }
 }
 
-export default IndexAll
+export default CategoryAll

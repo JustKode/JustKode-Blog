@@ -77,7 +77,7 @@ class Comments extends Component<CommentProps, any> {
 
   getComments = async () => {
     try {
-      const comments: any = await axios.get(apiServer + `/post/${this.props.id}/comments`)
+      const comments: any = await axios.get(apiServer + `/post/${this.props.id}/comments/`)
     
       let count = comments.data.length
       for (let i = 0; i < comments.data.length; i++) {

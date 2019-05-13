@@ -60,6 +60,15 @@ const Title = styled.div`
   margin: 1rem;
 `
 
+const MorePost = styled.div`
+  span {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: black;
+    cursor: pointer;
+  }
+`
+
 class PostAll extends Component<any, any> {
   static async getInitialProps({ query }: any) {
     try {
@@ -72,30 +81,43 @@ class PostAll extends Component<any, any> {
     } catch (e) {
       return {
         board: {},
-        posts: {}
+        posts: []
       }
     }
   }
 
   render() {
-    console.log(this.props.board)
-    console.log(this.props.posts)
-
     const boardlist = this.props.board.map((category: any, i: number) => {
       const subboardlist = category.subcategorys.map((subcategory: any, j: number) => {
         return (
           <SubCategoryContainer key={j}>
-            - <Link route="post/list/subcategory" params={{category: category.url, subcategory: subcategory.url, page: 1}}>{subcategory.name}</Link>
+            - <Link route="board/subcategory" params={{category: category.url, subcategory: subcategory.url, page: 1}}>{subcategory.name}</Link>
           </SubCategoryContainer>
         )
       })
       return (
         <Fragment key={i}>
           <CategoryContainer>
-            - <Link route="post/list/category" params={{category: category.url, page: 1}}>{category.name}</Link>
+            - <Link route="board/category" params={{category: category.url, page: 1}}>{category.name}</Link>
           </CategoryContainer>
           {subboardlist}
         </Fragment>
+      )
+    })
+
+    const postlist = this.props.posts.map((post: any, i: number) => {
+      return (
+        <Preview 
+          key={i}
+          img={apiServer + post.image}
+          title={post.title}
+          commentCount={post.comment_count}
+          content={post.summary}
+          category={post.category_name}
+          writedAt={post.writedAt}
+          postId={post.id}
+          categoryLink={post.category_url}
+        />
       )
     })
 
@@ -110,6 +132,12 @@ class PostAll extends Component<any, any> {
           </SubContainer>
           <SubContainer>
             <Title><span>Recent Post</span></Title>
+            {postlist}
+            <MorePost>
+              <Link route="post/list" params={{page: 1}}>
+                <span><i className="fas fa-plus"></i> 더 보기</span>
+              </Link>
+            </MorePost>
           </SubContainer>
         </MainContainer>
       </Layout>
