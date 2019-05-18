@@ -1,8 +1,11 @@
-import * as React from "react"
+import React, {Component} from "react"
 import Head from 'next/head'
+import axios from 'axios'
+import Error from 'next/error'
 import Layout from "../components/layout"
 import Banner from "../components/banner"
 import Preview from "../components/preview"
+import {apiServer} from '../env'
 import styled from "styled-components"
 import {phoneMaxRowSize, tabletMaxRowSize, sidePaddingSize} from '../styles/layout'
 
@@ -60,9 +63,44 @@ const LinkContainer = styled.div`
 `
 
 
-export default () => {
-  return (
-    <Layout>
+class Index extends Component<any, any> {
+  static async getInitialProps({ query }: any) {
+    try {
+      const board = await axios.get(apiServer + '/board')
+      const posts = await axios.get(apiServer + '/board/all')
+      return {
+        board: board.data,
+        posts: posts.data
+      }
+    } catch (e) {
+      return {error: e.response.status}
+    }
+  }
+
+  render() {
+    if (this.props.error) {
+      return (<Error statusCode={this.props.error} />)
+    }  
+
+    // posts components
+    const postlist = this.props.posts.map((post: any, i: number) => {
+      return (
+        <Preview 
+          key={i}
+          img={apiServer + post.image}
+          title={post.title}
+          commentCount={post.comment_count}
+          content={post.summary}
+          category={post.category_name}
+          writedAt={post.writedAt}
+          postId={post.id}
+          categoryLink={post.category_url}
+        />
+      )
+    })
+
+    return (
+      <Layout>
       <Head>
         <title>Hello! JustKode!</title>
       </Head>
@@ -79,39 +117,23 @@ export default () => {
         <HelloContainer style={{backgroundColor: '#eeeeee'}}>
           <HelloSubContainer>
             <HelloTitle><span>Recent Posts</span></HelloTitle>
-            <Preview
-              img="/static/banner-image.jpg"
-              title="string"
-              commentCount={1}
-              content="string"
-              category="string"
-              postId={1}
-              categoryLink="github.com"
-              writedAt="2019-05-01"
-            ></Preview>
-            <Preview
-              img="/static/banner-image.jpg"
-              title="string"
-              commentCount={3}
-              content="나는 빡빡이다 나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다나는 빡빡이다"
-              category="string"
-              postId={1}
-              categoryLink="github.com"
-              writedAt="2019-05-01"
-            ></Preview>
+            {postlist}
           </HelloSubContainer>
         </HelloContainer>
         <HelloContainer style={{backgroundColor: '#444444', color: 'white'}}>
           <HelloSubContainer>
             <HelloTitle><span style={{borderBottom: '0.4rem solid white'}}>Link</span></HelloTitle>
             <LinkContainer>
-              <a href=""><i className="fas fa-user-alt"></i></a>
-              <a href=""><i className="fab fa-github"></i></a>
-              <a href=""><i className="fab fa-instagram"></i></a>
-              <a href=""><i className="fab fa-facebook-square"></i></a>
+              <a href="/info"><i className="fas fa-user-alt"></i></a>
+              <a href="https://github.com/JustKode"><i className="fab fa-github"></i></a>
+              <a href="https://www.instagram.com/0ccean/"><i className="fab fa-instagram"></i></a>
+              <a href="https://www.facebook.com/profile.php?id=100014409812788"><i className="fab fa-facebook-square"></i></a>
             </LinkContainer>
           </HelloSubContainer>
         </HelloContainer>
     </Layout>
-  )
+    )
+  }
 }
+
+export default Index
