@@ -1,0 +1,36 @@
+version: "3"
+
+services:
+  mysql:
+    image: mysql:5.7
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_DATABASE: 'djangodocker_db'
+      MYSQL_USER: 'root'
+      MYSQL_PASSWORD: 'root'
+      MYSQL_ROOT_PASSWORD: 'root'
+  backend:
+    build: ./backend
+    working_dir: /backend
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./backend:/backend # maps host diretory to internal container directory
+    depends_on:
+      - mysql
+  frontend:
+    build: ./frontend
+    working_dir: /frontend
+    command: npm run start
+    volumes:
+      - ./frontend:/frontend
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - .:/code
+      - ./nginx:/etc/nginx/conf.d
+    depends_on:
+      - backend
+      - frontend
