@@ -1,8 +1,9 @@
-version: "3"
+version: "2.1"
 
 services:
   mysql:
     image: mysql:5.7
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_general_ci
     ports:
       - '3306:3306'
     environment:
@@ -10,20 +11,24 @@ services:
       MYSQL_USER: 'root'
       MYSQL_PASSWORD: 'root'
       MYSQL_ROOT_PASSWORD: 'root'
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
   backend:
     build: ./backend
     working_dir: /backend
-    command: python manage.py runserver 0.0.0.0:8000
+    restart: on-failure
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000" # gunicorn project.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - ./backend:/backend # maps host diretory to internal container directory
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
   frontend:
     build: ./frontend
     working_dir: /frontend
     command: npm run start
-    volumes:
-      - ./frontend:/frontend
   nginx:
     image: nginx:latest
     ports:

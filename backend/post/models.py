@@ -48,9 +48,9 @@ class Post(models.Model):
                         left = 0
                         right = size[0]
                     croped = im.crop((left, top, right, bottom))
-                    croped.thumbnail((170, 100))
+                    croped = croped.resize((170, 100), Image.ANTIALIAS)
                     link = 'uploads/thumbnail/' + os.path.basename(f.name)
-                    croped.convert('RGB').save(link, "JPEG", quality=200)
+                    croped.convert('RGBA').save(link, "PNG", quality=90)
                     self.image = '/' + link
 
         super().save(*args, **kwargs)

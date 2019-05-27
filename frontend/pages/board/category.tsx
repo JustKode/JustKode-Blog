@@ -71,7 +71,7 @@ class CategoryAll extends Component<any, any> {
         return (
           <Preview 
             key={i}
-            img={apiServer + post.image}
+            img={post.image}
             title={post.title}
             commentCount={post.comment_count}
             content={post.summary}

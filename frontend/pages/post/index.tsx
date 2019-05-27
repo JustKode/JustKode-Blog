@@ -80,7 +80,7 @@ class Post extends Component<any, any> {
               <Title>{this.props.post.title}</Title>
               <span>
                 <i className="far fa-folder-open"></i>
-                <Link href={this.props.post.category_url}><span style={{cursor: 'pointer'}}>{this.props.post.category_name}</span></Link>
+                <Link href={`/board/${this.props.post.category_url}`}><span style={{cursor: 'pointer'}}>{this.props.post.category_name}</span></Link>
               </span>
               <span>
                 <i className="far fa-clock"></i>

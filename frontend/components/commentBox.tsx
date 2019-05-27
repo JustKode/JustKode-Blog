@@ -2,7 +2,7 @@ import React, {Component, Fragment} from "react"
 import styled from "styled-components"
 import Comment from "./comment"
 import SubComment from "./subcomment"
-import {apiServer} from "../env"
+import {apiServer, staticServer} from "../env"
 import {phoneMaxRowSize, tabletMaxRowSize, sidePaddingSize} from '../styles/layout'
 import axios from 'axios'
 
@@ -77,7 +77,7 @@ class Comments extends Component<CommentProps, any> {
 
   getComments = async () => {
     try {
-      const comments: any = await axios.get(apiServer + `/post/${this.props.id}/comments/`)
+      const comments: any = await axios.get(staticServer + `/post/${this.props.id}/comments/`)
     
       let count = comments.data.length
       for (let i = 0; i < comments.data.length; i++) {
@@ -94,7 +94,7 @@ class Comments extends Component<CommentProps, any> {
   
   postComment = async () => {
     try {
-      const post = await axios.post(apiServer + `/post/${this.props.id}/comments`, {
+      const post = await axios.post(staticServer + `/post/${this.props.id}/comments`, {
         content: this.state.content,
         writer: this.state.writer,
         password: this.state.password,

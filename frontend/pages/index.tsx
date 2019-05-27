@@ -5,7 +5,7 @@ import Error from 'next/error'
 import Layout from "../components/layout"
 import Banner from "../components/banner"
 import Preview from "../components/preview"
-import {apiServer} from '../env'
+import {apiServer, staticServer} from '../env'
 import styled from "styled-components"
 import {phoneMaxRowSize, tabletMaxRowSize, sidePaddingSize} from '../styles/layout'
 
@@ -73,7 +73,12 @@ class Index extends Component<any, any> {
         posts: posts.data
       }
     } catch (e) {
-      return {error: e.response.status}
+      console.log(e)
+      if (e.response) { 
+        return {error: e.response.status}
+      } else {
+        return {error: 500}
+      }
     }
   }
 
@@ -87,7 +92,7 @@ class Index extends Component<any, any> {
       return (
         <Preview 
           key={i}
-          img={apiServer + post.image}
+          img={post.image}
           title={post.title}
           commentCount={post.comment_count}
           content={post.summary}

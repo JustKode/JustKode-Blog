@@ -1,7 +1,7 @@
 import React, {Component} from "react"
 import styled from "styled-components"
 import axios from "axios"
-import {apiServer} from "../env"
+import {apiServer, staticServer} from "../env"
 import {phoneMaxRowSize, tabletMaxRowSize, sidePaddingSize} from '../styles/layout'
 
 
@@ -121,7 +121,7 @@ class SubComment extends Component<CommentProps, any> {
 
     modify = async () => {
         try {
-            const res = await axios.put(apiServer + `/post/subcomment/${this.props.comment.id}`, {
+            const res = await axios.put(staticServer + `/post/subcomment/${this.props.comment.id}`, {
                 password: this.state.password,
                 content: this.state.content
             })
@@ -146,7 +146,7 @@ class SubComment extends Component<CommentProps, any> {
 
     remove = async () => {
         try {
-            const res = await axios.delete(apiServer + `/post/subcomment/${this.props.comment.id}`, {
+            const res = await axios.delete(staticServer + `/post/subcomment/${this.props.comment.id}`, {
                 data: {password: this.state.password}
             })
             alert("성공적으로 변경 되었습니다.")

@@ -1,6 +1,6 @@
 /venv
-migrations
+migrations/
 /static/admin
 /static/ckeditor
 /static/rest_framework
-/uploads
+/uploads/ckeditor
