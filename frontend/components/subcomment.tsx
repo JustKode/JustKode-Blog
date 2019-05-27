@@ -121,7 +121,7 @@ class SubComment extends Component<CommentProps, any> {
 
     modify = async () => {
         try {
-            const res = await axios.put(staticServer + `/post/subcomment/${this.props.comment.id}`, {
+            const res = await axios.put(staticServer + `/post/subcomment/${this.props.comment.id}/`, {
                 password: this.state.password,
                 content: this.state.content
             })
@@ -129,8 +129,8 @@ class SubComment extends Component<CommentProps, any> {
             this.resetStates()
             this.props.reset()
         } catch(e) {
-            if (e.status == 400) alert("비밀번호가 일치하지 않습니다.")
-            else if (e.status == 404) {
+            if (e.response.status == 400) alert("비밀번호가 일치하지 않습니다.")
+            else if (e.response.status == 404) {
                 alert("댓글이 존재하지 않습니다.")
                 this.props.reset()
             }
@@ -146,15 +146,15 @@ class SubComment extends Component<CommentProps, any> {
 
     remove = async () => {
         try {
-            const res = await axios.delete(staticServer + `/post/subcomment/${this.props.comment.id}`, {
+            const res = await axios.delete(staticServer + `/post/subcomment/${this.props.comment.id}/`, {
                 data: {password: this.state.password}
             })
             alert("성공적으로 변경 되었습니다.")
             this.resetStates()
             this.props.reset()
         } catch(e) {
-            if (e.status == 400) alert("비밀번호가 일치하지 않습니다.")
-            else if (e.status == 404) {
+            if (e.response.status == 400) alert("비밀번호가 일치하지 않습니다.")
+            else if (e.response.status == 404) {
                 alert("댓글이 존재하지 않습니다.")
                 this.props.reset()
             }

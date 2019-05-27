@@ -56,7 +56,7 @@ const Content = styled.div`
 class Post extends Component<any, any> {
   static async getInitialProps({ query }: any) {
     try {
-      const post = await axios.get(apiServer + `/post/${query.postId}`)
+      const post = await axios.get(apiServer + `/post/${query.postId}/`)
       return {
         id: query.postId,
         post: post.data.post,

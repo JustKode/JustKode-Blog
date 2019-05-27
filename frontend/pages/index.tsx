@@ -66,8 +66,8 @@ const LinkContainer = styled.div`
 class Index extends Component<any, any> {
   static async getInitialProps({ query }: any) {
     try {
-      const board = await axios.get(apiServer + '/board')
-      const posts = await axios.get(apiServer + '/board/all')
+      const board = await axios.get(apiServer + '/board/')
+      const posts = await axios.get(apiServer + '/board/all/')
       return {
         board: board.data,
         posts: posts.data

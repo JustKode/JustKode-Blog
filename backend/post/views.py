@@ -8,9 +8,9 @@ from post.models import Post, Comment, SubComment
 
 
 class PostView(APIView):
-    def get(self, request, id, format=None):
+    def get(self, request, post_id, format=None):
         try:
-            post = Post.objects.get(pk=id)
+            post = Post.objects.get(pk=post_id)
             post_serializer = PostSerializer(post)
 
             comments = Comment.objects.filter(post=post)
@@ -24,9 +24,9 @@ class PostView(APIView):
 
 
 class PostCommentView(APIView):
-    def get(self, request, id):
+    def get(self, request, post_id):
         try:
-            post = Post.objects.get(pk=id)
+            post = Post.objects.get(pk=post_id)
             post_serializer = PostSerializer(post)
 
             comments = Comment.objects.filter(post=post)
@@ -36,16 +36,16 @@ class PostCommentView(APIView):
         except Post.DoesNotExist:
             return Response({"message": "post does not exist"}, status=status.HTTP_404_NOT_FOUND)
 
-    def post(self, request, id):
+    def post(self, request, post_id):
         """
         필요 키 : writer, password, email, content
         """
         try:
-            post = Post.objects.get(pk=id)
+            post = Post.objects.get(pk=post_id)
             
             required_key = ('writer', 'password', 'email', 'content')
             if all(i in request.data for i in required_key):
-                temp_dict = {'post': id}
+                temp_dict = {'post': post_id}
                 temp_dict.update(request.data)
                 
                 comment = CommentPostSerializer(data=temp_dict)
@@ -59,20 +59,20 @@ class PostCommentView(APIView):
     
 
 class CommentView(APIView):
-    def get(self, request, id):
+    def get(self, request, comment_id):
         try:
-            comment = Comment.objects.get(pk=id)
+            comment = Comment.objects.get(pk=comment_id)
             serializer = CommentWithChildSerializer(comment)
             return Response(serializer.data)
         except Comment.DoesNotExist:
             return Response({"message": "comment does not exist"}, status=status.HTTP_404_NOT_FOUND)
 
-    def post(self, request, id):
+    def post(self, request, comment_id):
         try:
-            comment = Comment.objects.get(pk=id)
+            comment = Comment.objects.get(pk=comment_id)
             required_key = ('writer', 'password', 'email', 'content')
             if all(i in request.data for i in required_key):
-                temp_dict = {'parent': id}
+                temp_dict = {'parent': comment_id}
                 temp_dict.update(request.data)
 
                 subcomment = SubCommentPostSerializer(data=temp_dict)
@@ -84,12 +84,12 @@ class CommentView(APIView):
         except Post.DoesNotExist:
             return Response({"message": "comment does not exist"}, status=status.HTTP_404_NOT_FOUND)
 
-    def put(self, request, id):
+    def put(self, request, comment_id):
         """
         필요 키 : password, content
         """
         try:
-            comment = Comment.objects.get(pk=id)
+            comment = Comment.objects.get(pk=comment_id)
             required_key = ('password', 'content')
             if all(i in request.data for i in required_key):
                 if check_password(request.data['password'], comment.password):
@@ -103,12 +103,12 @@ class CommentView(APIView):
         except Comment.DoesNotExist:
             return Response({"message": "comment does not exist"}, status=status.HTTP_404_NOT_FOUND)
 
-    def delete(self, request, id):
+    def delete(self, request, comment_id):
         """
         필요 키 : password
         """
         try:
-            comment = Comment.objects.get(pk=id)
+            comment = Comment.objects.get(pk=comment_id)
             required_key = ('password',)
             if all(i in request.data for i in required_key):
                 if check_password(request.data['password'], comment.password):
@@ -123,17 +123,17 @@ class CommentView(APIView):
 
 
 class SubCommentView(APIView):
-    def get(self, request, id):
+    def get(self, request, subcomment_id):
         try:
-            subcomment = SubComment.objects.get(pk=id)
+            subcomment = SubComment.objects.get(pk=subcomment_id)
             serializer = SubCommentSerializer(subcomment)
             return Response(serializer.data)
         except SubComment.DoesNotExist:
             return Response({"message": "subcomment does not exist"}, status=status.HTTP_404_NOT_FOUND)
         
-    def put(self, request, id):
+    def put(self, request, subcomment_id):
         try:
-            subcomment = SubComment.objects.get(pk=id)
+            subcomment = SubComment.objects.get(pk=subcomment_id)
             required_key = ('content', 'password')
             if all(i in request.data for i in required_key):
                 if check_password(request.data['password'], subcomment.password):
@@ -147,9 +147,9 @@ class SubCommentView(APIView):
         except SubComment.DoesNotExist:
             return Response({"message": "subcomment does not exist"}, status=status.HTTP_404_NOT_FOUND)
     
-    def delete(self, request, id):
+    def delete(self, request, subcomment_id):
         try:
-            subcomment = SubComment.objects.get(pk=id)
+            subcomment = SubComment.objects.get(pk=subcomment_id)
             required_key = ('password',)
             if all(i in request.data for i in required_key):
                 if check_password(request.data['password'], subcomment.password):

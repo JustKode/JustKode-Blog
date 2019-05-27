@@ -94,7 +94,7 @@ class Comments extends Component<CommentProps, any> {
   
   postComment = async () => {
     try {
-      const post = await axios.post(staticServer + `/post/${this.props.id}/comments`, {
+      const post = await axios.post(staticServer + `/post/${this.props.id}/comments/`, {
         content: this.state.content,
         writer: this.state.writer,
         password: this.state.password,

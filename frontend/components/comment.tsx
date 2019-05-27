@@ -172,16 +172,16 @@ class Comment extends Component<CommentProps, any> {
 
     modify = async () => {
         try {
-            const res = await axios.put(staticServer + `/post/comment/${this.props.comment.id}`, {
+            const res = await axios.put(staticServer + `/post/comment/${this.props.comment.id}/`, {
                 password: this.state.password,
-                content: this.state.comment.content
+                content: this.state.content
             })
             alert("성공적으로 변경 되었습니다.")
             this.resetStates()
             this.props.reset()
         } catch(e) {
-            if (e.status == 400) alert("비밀번호가 일치하지 않습니다.")
-            else if (e.status == 404) {
+            if (e.response.status == 400) alert("비밀번호가 일치하지 않습니다.")
+            else if (e.response.status == 404) {
                 alert("댓글이 존재하지 않습니다.")
                 this.props.reset()
             }
@@ -198,15 +198,15 @@ class Comment extends Component<CommentProps, any> {
 
     remove = async () => {
         try {
-            const res = await axios.delete(staticServer + `/post/comment/${this.props.comment.id}`, {
+            const res = await axios.delete(staticServer + `/post/comment/${this.props.comment.id}/`, {
                 data: {password: this.state.password}
             })
             alert("성공적으로 변경 되었습니다.")
             this.resetStates()
             this.props.reset()
         } catch(e) {
-            if (e.status == 400) alert("비밀번호가 일치하지 않습니다.")
-            else if (e.status == 404) {
+            if (e.response.status == 400) alert("비밀번호가 일치하지 않습니다.")
+            else if (e.response.status == 404) {
                 alert("댓글이 존재하지 않습니다.")
                 this.props.reset()
             }
@@ -223,7 +223,7 @@ class Comment extends Component<CommentProps, any> {
 
     subcomment = async () => {
         try {
-            const subcomment = await axios.post(staticServer + `/post/comment/${this.state.comment.id}`, {
+            const subcomment = await axios.post(staticServer + `/post/comment/${this.state.comment.id}/`, {
                 writer: this.state.subwriter,
                 password: this.state.subpassword,
                 email: this.state.subemail,
@@ -261,8 +261,8 @@ class Comment extends Component<CommentProps, any> {
                         <i className="far fa-edit" onClick={this.modifyButton}></i>
                         <i className="fas fa-times" onClick={this.removeButton}></i>
                     </CommentTop>
-                    <input value={this.state.content} placeholder="내용을 입력 해 주세요." onChange={this.handleChange} name='content' />
-                    <input value={this.state.password} placeholder="비밀번호" onChange={this.handleChange} name='password' />
+                    <textarea value={this.state.content} placeholder="내용을 입력 해 주세요." onChange={this.handleChange} name='content' />
+                    <input type="password" value={this.state.password} placeholder="비밀번호" onChange={this.handleChange} name='password' />
                     <input type="button" onClick={this.modify} value="제출" />
                 </CommentContainer>
             )
