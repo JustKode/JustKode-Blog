@@ -1,5 +1,6 @@
 import React, {Component, Fragment} from "react"
 import Error from 'next/error'
+import Head from 'next/head'
 import Layout from "../../../components/layout"
 import Preview from "../../../components/preview"
 import styled from "styled-components"
@@ -84,6 +85,13 @@ class IndexAll extends Component<any, any> {
 
     return (
       <Layout>
+        <Head>
+          <title>Recent Post : Page {this.props.page}</title>
+          <meta name="description" content={`모든 글 ${this.props.page} 페이지`}></meta>
+          <meta property="og:image" content="/static/banner-image.jpg"></meta>
+          <meta property="og:description" content={`모든 글 ${this.props.page} 페이지`}></meta>
+          <meta property="og:title" content={`Recent Post : Page ${this.props.page}`}></meta>
+        </Head>
         <MainContainer>
           <SubContainer>
             <Title><span>Recent Post : Page {this.props.page}</span></Title>

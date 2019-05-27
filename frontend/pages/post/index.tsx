@@ -74,6 +74,13 @@ class Post extends Component<any, any> {
 
     return (
       <Layout>
+        <Head>
+          <title>{this.props.post.title}</title>
+          <meta name="description" content={this.props.post.summary}></meta>
+          <meta property="og:image" content={this.props.post.image}></meta>
+          <meta property="og:description" content={this.props.post.summary}></meta>
+          <meta property="og:title" content={this.props.post.title}></meta>
+        </Head>
         <MainContainer>
           <SubContainer>
             <PostInfo>

@@ -108,6 +108,9 @@ class Index extends Component<any, any> {
       <Layout>
       <Head>
         <title>Hello! JustKode!</title>
+        <meta name="description" content="Hello! I'm JustKode!"></meta>
+        <meta property="og:title" content="Hello! JustKode!"></meta>
+        <meta property="og:description" content="Hello! I'm JustKode!"></meta>
       </Head>
         <Banner></Banner>
         <HelloContainer>

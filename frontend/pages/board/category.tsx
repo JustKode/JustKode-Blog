@@ -1,4 +1,5 @@
 import React, {Component, Fragment} from "react"
+import Head from 'next/head'
 import Error from 'next/error'
 import Layout from "../../components/layout"
 import Banner from "../../components/banner"
@@ -86,6 +87,13 @@ class CategoryAll extends Component<any, any> {
 
     return (
       <Layout>
+        <Head>
+          <title>{this.props.category.name} : Page {this.props.page}</title>
+          <meta name="description" content={`${this.props.category.name} ${this.props.page} 페이지`}></meta>
+          <meta property="og:image" content="/static/banner-image.jpg"></meta>
+          <meta property="og:description" content={`${this.props.category.name} ${this.props.page} 페이지`}></meta>
+          <meta property="og:title" content={`${this.props.category.name} : Page ${this.props.page}`}></meta>
+        </Head>
         <MainContainer>
           <SubContainer>
             <Title><span>{this.props.category.name} : Page {this.props.page}</span></Title>

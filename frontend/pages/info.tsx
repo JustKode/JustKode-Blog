@@ -97,6 +97,7 @@ export default () => {
         <Layout>
           <Head>
             <title>I'm JustKode!</title>
+            <meta name="description" content="Hello! I'm JustKode!"></meta>
           </Head>
             <Banner></Banner>
             <InfoContainer>

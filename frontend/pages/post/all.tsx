@@ -1,4 +1,5 @@
 import React, {Component, Fragment} from "react"
+import Head from 'next/head'
 import Error from 'next/error'
 import Layout from "../../components/layout"
 import Banner from "../../components/banner"
@@ -174,6 +175,13 @@ class PostAll extends Component<any, any> {
     return (
       <Layout>
         <MainContainer>
+          <Head>
+            <title>JustKode - Posts</title>
+            <meta name="description" content="전체 글 목록과 게시판 목록"></meta>
+            <meta property="og:image" content="/static/banner-image.jpg"></meta>
+            <meta property="og:description" content="전체 글 목록과 게시판 목록"></meta>
+            <meta property="og:title" content="JustKode - Posts"></meta>
+          </Head>
           <Banner></Banner>
           <SubContainer>
             <Title><span>Board List</span></Title>
